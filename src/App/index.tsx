@@ -1,9 +1,9 @@
 import React from 'react';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
-import GlobalStyle from '../shared/styles/GlobalStyles.js';
-import AppLayout from '../shared/styledComponents/AppLayoutStyles.js';
-import GridLayout from '../shared/styledComponents/GridLayout.js';
-import ListLayout from '../shared/styledComponents/ListLayout.js';
+import AppLayout from '../shared/styledComponents/AppLayoutStyles';
+import GridLayout from './components/GridLayout/index';
+import ListLayout from './components/ListLayout/index';
+import GlobalStyle from '../shared/styles/GlobalStyles';
 
 const GITHUB_BASE_URL = 'https://api.github.com/graphql';
 
@@ -19,8 +19,8 @@ const App = (): JSX.Element => {
   return (
     <ApolloProvider client={client}>
       <AppLayout>
-        <GridLayout>Grid Layout</GridLayout>
-        <ListLayout>List Layout</ListLayout>
+        <GridLayout />
+        <ListLayout />
       </AppLayout>
       <GlobalStyle />
     </ApolloProvider>
