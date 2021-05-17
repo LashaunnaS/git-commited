@@ -1,10 +1,11 @@
 import React from 'react';
+import AutoCompleteForm from '../AutoCompleteForm';
 import ListLayoutStyles from './ListLayoutStyles';
 
 const ListLayout = (): JSX.Element => {
   return (
     <ListLayoutStyles>
-      <p>List Layout</p>
+      <AutoCompleteForm />
     </ListLayoutStyles>
   );
 };
