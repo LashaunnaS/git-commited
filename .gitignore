@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# generted types file for githubs graphql api
+/src/generated/graphql.tsx
