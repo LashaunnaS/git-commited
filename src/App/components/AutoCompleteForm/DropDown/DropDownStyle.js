@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const DropDown = styled.ul`
   background-color: var(--color-white-regular);
-  border-radius: 10px;
+  border-radius: var(--border-radius);
   list-style: none;
 `;
 

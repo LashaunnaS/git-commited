@@ -7,7 +7,8 @@ const DropDownItem = styled.li`
   padding: 17px 30px 0;
 
   &:last-child {
-    border-radius: 0 0 10px 10px;
+    border-radius: var(--border-radius-none) var(--border-radius-none)
+      var(--border-radius) var(--border-radius);
   }
 `;
 
