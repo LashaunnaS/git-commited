@@ -22,7 +22,8 @@ const GlobalStyle = createGlobalStyle`
 
     // Color
     --color-white-regular: #FFFFFF;
-    --color-purple-light: #ECECf6;
+    --color-white-tint: #ECECf6;
+    --color-purple-light: #8383af;
     --color-black-regular: #252525;
     --color-black-light: #564F62;
     --color-black-lighter: #ABA8AF;
@@ -39,9 +40,6 @@ const GlobalStyle = createGlobalStyle`
     --border-radius: 5px;
     --border-radius-none: 0px;
   }
-  @import url(
-'https://fonts.googleapis.com/css?family=Work+Sans:300|Montserrat:400,600'
-);
   * {
     box-sizing: border-box;
     margin: 0;
