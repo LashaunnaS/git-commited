@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   :root {
+    // Font Size
     --font-primary: 'Work Sans', sans-serif;
     --font-secondary: 'Montserrat', serif;
     --font-size-smaller: 1.5rem;
@@ -11,24 +12,32 @@ const GlobalStyle = createGlobalStyle`
     --font-size-larger: 3.6rem;
     --font-size-xlarge: 4.8rem;
 
+    // Line Height
     --line-height-smaller: 20px;
     --line-height-small: 30px;
     --line-height-regular: 32px;
     --line-height-large: 40px;
     --line-height-larger: 48px;
     --line-height-xlarge: 56px;
+
+    // Color
     --color-white-regular: #FFFFFF;
     --color-purple-light: #ECECf6;
     --color-black-regular: #252525;
     --color-black-light: #564F62;
     --color-black-lighter: #ABA8AF;
-    --bg-color-primary: #ff7575;
     --color-secondary: '';
     --color-tertiary: '';
+
+    // Screen Size
     --screen-xs: 575px;
     --screen-sm: 767px;
     --screen-md: 991px;
     --screen-lg: 1199px;
+
+    // Border Radius
+    --border-radius: 5px;
+    --border-radius-none: 0px;
   }
   @import url(
 'https://fonts.googleapis.com/css?family=Work+Sans:300|Montserrat:400,600'
