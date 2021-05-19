@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
     --line-height-larger: 48px;
     --line-height-xlarge: 56px;
     --color-white-regular: #FFFFFF;
+    --color-purple-light: #ECECf6;
     --color-black-regular: #252525;
     --color-black-light: #564F62;
     --color-black-lighter: #ABA8AF;
