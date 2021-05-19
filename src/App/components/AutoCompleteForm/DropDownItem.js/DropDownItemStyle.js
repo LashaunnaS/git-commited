@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 const DropDownItem = styled.li`
   background-color: ${(props) =>
-    props.active ? 'var(--color-purple-light)' : 'var(--color-white-regula)'};
+    props.active ? 'var(--color-white-tint)' : 'var(--color-white-regular)'};
   height: 46px;
-  padding: 17px 30px 0;
+  padding: 13px 30px 0;
 
   &:last-child {
     border-radius: var(--border-radius-none) var(--border-radius-none)
