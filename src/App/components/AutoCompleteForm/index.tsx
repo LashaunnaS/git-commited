@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
 import { Search } from 'react-feather';
-import DropDown from './DropDown/DropDownStyle';
-import DropDownItem from './DropDownItem.js/DropDownItemStyle';
-import DropDownItemText from './DropDownItem.js/DropDownItemTextStyles';
-import Form from './Form/FormStyles';
+import DropDown from './DropDownStyles/DropDownStyles';
+import DropDownItem from './DropDownItemStyles/DropDownItemStyles';
+import DropDownItemText from './DropDownItemStyles/DropDownItemTextStyles';
+import Form from './FormStyles/FormStyles';
 import Input from './Input/InputStyles';
 
-const Autocomplete = ({ repositories }: any) => {
-  const [active, setActive] = useState(0);
-  const [filtered, setFiltered] = useState([]);
-  const [isShow, setIsShow] = useState(false);
-  const [input, setInput] = useState('');
+interface AutoCompleteProps {
+  repositories: Array<string>;
+  updateRepoSelection: any;
+}
+
+const Autocomplete = ({
+  repositories,
+  updateRepoSelection,
+}: AutoCompleteProps): JSX.Element => {
+  const [active, setActive] = useState<number>(0);
+  const [filtered, setFiltered] = useState<Array<string>>([]);
+  const [isShow, setIsShow] = useState<boolean>(false);
+  const [input, setInput] = useState<string>('');
 
   const onChange = (e: React.FormEvent<HTMLInputElement>) => {
     const newInput = e.currentTarget.value;
@@ -35,6 +43,7 @@ const Autocomplete = ({ repositories }: any) => {
     setFiltered([]);
     setIsShow(false);
     setInput(filtered[repoIndex]);
+    updateRepoSelection(filtered[repoIndex]);
   };
 
   const onKeyDown = (
