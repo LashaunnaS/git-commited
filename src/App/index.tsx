@@ -16,9 +16,9 @@ const client = new ApolloClient({
 });
 
 const App = (): JSX.Element => {
-  const [selection, setSelection] = useState<Array<number>>([]);
+  const [selection, setSelection] = useState<Array<string>>([]);
 
-  const updateRepoSelection = (newRepo: number) =>
+  const updateRepoSelection = (newRepo: string) =>
     setSelection((oldRepoList) => [...oldRepoList, newRepo]);
 
   return (

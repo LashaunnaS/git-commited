@@ -55,6 +55,7 @@ const Autocomplete = ({
       setActive(0);
       setIsShow(false);
       setInput(filtered[active]);
+      updateRepoSelection(filtered[active]);
     } else if (e.keyCode === 38) {
       // "up arrow" key
       return active === 0 ? null : setActive(active - 1);
