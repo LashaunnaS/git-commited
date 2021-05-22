@@ -4,8 +4,8 @@ const Input = styled.input`
   border: none;
   border-radius: var(--border-radius);
   font-size: var(--font-size-smaller);
-  height: 62px;
-  padding: 5px 30px;
+  height: var(--height-primary);
+  padding-left: 3rem;
   width: 90%;
 
   &:focus {

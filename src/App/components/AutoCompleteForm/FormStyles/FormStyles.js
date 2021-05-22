@@ -8,7 +8,9 @@ const Form = styled.form`
          var(--border-radius-none) var(--border-radius-none)`
       : 'var(--border-radius)'};
   font-size: var(--font-size-smaller);
-  height: ${(props) => (props.dropDownActive ? '70px' : '62px')};
+  height: ${(props) =>
+    props.dropDownActive ? 'var(--height-secondary)' : 'var(--height-primary)'};
+  // positions dropdown over empty banner and list items
   position: relative;
   width: 100%;
   z-index: 1;
