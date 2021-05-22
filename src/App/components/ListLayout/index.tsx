@@ -1,27 +1,30 @@
 import { useQuery } from '@apollo/client';
-import React from 'react';
+import React, { useState } from 'react';
 import { Search } from 'react-feather';
+import debounce from 'lodash.debounce';
 import QUERY_REPOSITORY_NAME from '../../../shared/queries/repository';
 import AutoCompleteForm from '../AutoCompleteForm';
 import EmptyListBannerStyles from './EmptyListBannerStyles';
-
 import ListLayoutStyles from './ListLayoutStyles';
+import ListItemStyles from './ListItem';
 
 interface ListLayoutProps {
-  updateRepoSelection: React.Dispatch<React.SetStateAction<number | void>> | void;
+  addRepository: (newRepo: string) => void;
+  removeRepository: (repo: string) => void;
+  repoSelection: Array<string>;
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const ListLayout = ({ updateRepoSelection }: any): JSX.Element => {
-  const { loading, error, data } = useQuery(QUERY_REPOSITORY_NAME);
+const ListLayout = ({
+  addRepository,
+  repoSelection,
+  removeRepository,
+}: ListLayoutProps): JSX.Element => {
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
-  if (loading) {
-    return (
-      <ListLayoutStyles>
-        <p>loading...</p>
-      </ListLayoutStyles>
-    );
-  }
+  const { loading, error, data } = useQuery(QUERY_REPOSITORY_NAME, {
+    variables: { searchQ: `is:public ${searchQuery} in:titles` },
+  });
+
   if (error) {
     return (
       <ListLayoutStyles>
@@ -30,20 +33,30 @@ const ListLayout = ({ updateRepoSelection }: any): JSX.Element => {
     );
   }
 
+  const setSearchTermDebounced = debounce(setSearchQuery, 500);
+
   const selectedRepo: Array<string> = [];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data.search.edges.forEach((repo: any) => selectedRepo.push(repo.node.nameWithOwner));
+
+  data?.search.edges.forEach((repo: any) => selectedRepo.push(repo.node.nameWithOwner));
 
   return (
     <ListLayoutStyles>
       <AutoCompleteForm
         repositories={selectedRepo}
-        updateRepoSelection={updateRepoSelection}
+        addRepository={addRepository}
+        setSearchQuery={setSearchTermDebounced}
+        loading={loading}
       />
-      <EmptyListBannerStyles>
-        <Search color="#bcbcf2" height={50} width={50} />
-        <p> Search for a GitHub repository to populate graph</p>
-      </EmptyListBannerStyles>
+      {repoSelection.length === 0 ? (
+        <EmptyListBannerStyles>
+          <Search color="#bcbcf2" size={50} />
+          <p> Search for a GitHub repository to populate graph</p>
+        </EmptyListBannerStyles>
+      ) : (
+        repoSelection.map((repo) => {
+          return <ListItemStyles repository={repo} removeRepository={removeRepository} />;
+        })
+      )}
     </ListLayoutStyles>
   );
 };
