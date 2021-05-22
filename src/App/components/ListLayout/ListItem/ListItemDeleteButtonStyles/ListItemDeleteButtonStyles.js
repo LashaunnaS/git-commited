@@ -6,8 +6,7 @@ const ListItemDeleteButtonStyles = styled.button`
   background-color: #272736d1;
   border-radius: var(--border-radius-regular);
   height: 9rem;
-  position: absolute;
-  right: 3.3rem;
+  margin-left: -8rem;
   visibility: hidden;
   width: 8rem;
 
