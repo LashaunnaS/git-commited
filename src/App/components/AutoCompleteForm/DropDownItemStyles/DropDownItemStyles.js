@@ -10,7 +10,7 @@ const DropDownItem = styled.li`
 
   &:last-child {
     border-radius: var(--border-radius-none) var(--border-radius-none)
-      var(--border-radius) var(--border-radius);
+      var(--border-radius-regular) var(--border-radius-regular);
   }
 `;
 
