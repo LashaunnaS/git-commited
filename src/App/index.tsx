@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
+import { Repository } from '../generated/graphql';
+import GlobalStyle from '../shared/styles/GlobalStyles';
 import AppLayout from './AppLayoutStyles';
 import GridLayout from './components/GridLayout/index';
 import ListLayout from './components/ListLayout/index';
-import GlobalStyle from '../shared/styles/GlobalStyles';
 
 const GITHUB_BASE_URL = 'https://api.github.com/graphql';
 
@@ -15,13 +16,17 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const App = (): JSX.Element => {
-  const [selection, setSelection] = useState<Array<string>>([]);
+export interface Selection extends Pick<Repository, 'nameWithOwner'> {
+  color: string;
+}
 
-  const addRepository = (newRepo: string): void =>
+const App = (): JSX.Element => {
+  const [selection, setSelection] = useState<Array<Selection>>([]);
+
+  const addRepository = (newRepo: Selection): void =>
     setSelection((oldRepoList) => [...oldRepoList, newRepo]);
 
-  const removeRepository = (repo: string): void => {
+  const removeRepository = (repo: Selection): void => {
     const newSelection = selection.filter((item) => item !== repo);
     setSelection(newSelection);
   };
