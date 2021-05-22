@@ -2,48 +2,46 @@ import React, { useState } from 'react';
 import { Search } from 'react-feather';
 import DropDown from './DropDownStyles/DropDownStyles';
 import DropDownItem from './DropDownItemStyles/DropDownItemStyles';
-import DropDownItemText from './DropDownItemStyles/DropDownItemTextStyles';
+import RepositoryNameStyles from '../../../shared/styledComponents/RepositoryNameStyles';
 import Form from './FormStyles/FormStyles';
-import Input from './Input/InputStyles';
+import Input from './InputStyles/InputStyles';
 
 interface AutoCompleteProps {
   repositories: Array<string>;
-  updateRepoSelection: any;
+  addRepository: (newRepo: string) => void;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+  loading: boolean;
 }
 
 const Autocomplete = ({
   repositories,
-  updateRepoSelection,
+  addRepository,
+  setSearchQuery,
+  loading,
 }: AutoCompleteProps): JSX.Element => {
   const [active, setActive] = useState<number>(0);
-  const [filtered, setFiltered] = useState<Array<string>>([]);
   const [isShow, setIsShow] = useState<boolean>(false);
   const [input, setInput] = useState<string>('');
 
   const onChange = (e: React.FormEvent<HTMLInputElement>) => {
     const newInput = e.currentTarget.value;
+
     if (newInput === '') {
-      setFiltered([]);
       setInput('');
       setIsShow(false);
     } else {
-      const newFilteredRepositories = repositories.filter(
-        (repository: string) =>
-          repository.toLowerCase().indexOf(newInput.toLowerCase()) > -1,
-      );
       setActive(0);
-      setFiltered(newFilteredRepositories);
       setIsShow(true);
-      setInput(e.currentTarget.value);
+      setInput(newInput);
+      setSearchQuery(newInput);
     }
   };
 
   const onClick = (repoIndex: number) => {
     setActive(0);
-    setFiltered([]);
     setIsShow(false);
-    setInput(filtered[repoIndex]);
-    updateRepoSelection(filtered[repoIndex]);
+    setInput('');
+    addRepository(repositories[repoIndex]);
   };
 
   const onKeyDown = (
@@ -54,52 +52,60 @@ const Autocomplete = ({
       e.preventDefault();
       setActive(0);
       setIsShow(false);
-      setInput(filtered[active]);
-      updateRepoSelection(filtered[active]);
+      setInput('');
+      addRepository(repositories[active]);
     } else if (e.keyCode === 38) {
       // "up arrow" key
       return active === 0 ? null : setActive(active - 1);
     } else if (e.keyCode === 40) {
       // "down arrow" key
-      return active + 1 === filtered.length ? active : setActive(active + 1);
+      return active + 1 === repositories.length ? active : setActive(active + 1);
     }
 
     return null;
   };
 
-  const formatRepo = (repository: string) => {
+  const formatRepositoryName = (repository: string) => {
     const repo = repository.split('/');
 
     return (
       <>
-        <DropDownItemText primary>{repo[0]} / </DropDownItemText>
-        <DropDownItemText>{repo[1]}</DropDownItemText>
+        <RepositoryNameStyles primary>{repo[0]} / </RepositoryNameStyles>
+        <RepositoryNameStyles search>{repo[1]}</RepositoryNameStyles>
       </>
     );
   };
 
-  const renderAutocomplete = (): JSX.Element => {
+  const dropDownList = () => {
+    return repositories.map((repository: string, index: number) => {
+      return (
+        <DropDownItem
+          active={index === active}
+          key={repository}
+          onClick={() => onClick(index)}
+        >
+          {formatRepositoryName(repository)}
+        </DropDownItem>
+      );
+    });
+  };
+
+  const renderDropDownContent = () => {
+    if (repositories.length) {
+      return dropDownList();
+    }
+    if (loading) {
+      return <DropDownItem>loading...</DropDownItem>;
+    }
     return (
-      <DropDown>
-        {filtered.length ? (
-          filtered.map((repository: string, index: number) => {
-            return (
-              <DropDownItem
-                active={index === active}
-                key={repository}
-                onClick={() => onClick(index)}
-              >
-                {formatRepo(repository)}
-              </DropDownItem>
-            );
-          })
-        ) : (
-          <DropDownItem>
-            We couldn’t find any repositories matching &apos;{input}&apos;
-          </DropDownItem>
-        )}
-      </DropDown>
+      <DropDownItem>
+        We couldn’t find any repositories matching &apos;{input}&apos;
+      </DropDownItem>
     );
+  };
+
+  const renderAutocomplete = (): JSX.Element => {
+    return <DropDown>{renderDropDownContent()}</DropDown>;
   };
 
   return (
