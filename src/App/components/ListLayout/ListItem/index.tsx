@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import React, { useState } from 'react';
+import React from 'react';
 import { Star, Trash2 } from 'react-feather';
 import QUERY_REPOSITORY_STATS from '../../../../shared/queries/repositoryStats';
 import RepositoryNameStyles from '../../../../shared/styledComponents/RepositoryNameStyles';
@@ -15,17 +15,20 @@ interface ListItemProps {
   removeRepository: (repo: string) => void;
 }
 
-const ListItem = ({ repository, removeRepository }: any): JSX.Element => {
-  const { data } = useQuery(QUERY_REPOSITORY_STATS);
+const ListItem = ({ repository, removeRepository }: ListItemProps): JSX.Element => {
+  const [repoOwner, repoName] = repository.split('/');
+
+  const { data } = useQuery(QUERY_REPOSITORY_STATS, {
+    variables: { repoOwner, repoName },
+  });
 
   const stars = () => {
-    let num;
+    let num = data?.repository.stargazerCount;
+
     if (data?.repository.stargazerCount > 1000) {
-      num = `${Math.round(data.repository.stargazerCount / 1000)}k`;
+      num = `${Math.round(num / 1000)}k`;
     }
-    if (data?.repository.stargazerCount < 1000) {
-      num = data.repository.stargazerCount;
-    }
+
     return num;
   };
 
