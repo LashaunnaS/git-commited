@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
-import AppLayout from '../shared/styledComponents/AppLayoutStyles';
+import AppLayout from './AppLayoutStyles';
 import GridLayout from './components/GridLayout/index';
 import ListLayout from './components/ListLayout/index';
 import GlobalStyle from '../shared/styles/GlobalStyles';
@@ -18,14 +18,23 @@ const client = new ApolloClient({
 const App = (): JSX.Element => {
   const [selection, setSelection] = useState<Array<string>>([]);
 
-  const updateRepoSelection = (newRepo: string): void =>
+  const addRepository = (newRepo: string): void =>
     setSelection((oldRepoList) => [...oldRepoList, newRepo]);
+
+  const removeRepository = (repo: string): void => {
+    const newSelection = selection.filter((item) => item !== repo);
+    setSelection(newSelection);
+  };
 
   return (
     <ApolloProvider client={client}>
       <AppLayout>
         <GridLayout />
-        <ListLayout updateRepoSelection={updateRepoSelection} />
+        <ListLayout
+          addRepository={addRepository}
+          repoSelection={selection}
+          removeRepository={removeRepository}
+        />
       </AppLayout>
       <GlobalStyle />
     </ApolloProvider>
