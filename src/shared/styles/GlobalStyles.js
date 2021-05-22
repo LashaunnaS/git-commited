@@ -23,12 +23,10 @@ const GlobalStyle = createGlobalStyle`
     // Color
     --color-white-regular: #FFFFFF;
     --color-white-tint: #ECECf6;
-    --color-purple-light: #8383af;
-    --color-black-regular: #252525;
-    --color-black-light: #564F62;
-    --color-black-lighter: #ABA8AF;
-    --color-secondary: '';
-    --color-tertiary: '';
+    --color-purple-lighter: #bcbcf2;
+    --color-purple-light: #9797bc; 
+    --color-purple-dark: #242432; 
+    --color-black-regular: #252525; 
 
     // Screen Size
     --screen-xs: 575px;
@@ -37,8 +35,13 @@ const GlobalStyle = createGlobalStyle`
     --screen-lg: 1199px;
 
     // Border Radius
-    --border-radius: 5px;
+    --border-radius-regular: 5px;
+    --border-radius-large: 15px;
     --border-radius-none: 0px;
+
+    // Height -->
+    --height-primary: 6rem;
+    --height-secondary: 7rem;
   }
   * {
     box-sizing: border-box;
@@ -73,7 +76,7 @@ const GlobalStyle = createGlobalStyle`
   p {
     font-size: var(--font-size-small);
     line-height: var(--line-height-small);
-    color: var(--color-black-light)
+    color: var(--color-purple-lighter)
   }
   @media (max-width: var(--screen-sm)) {
     h1 {
