@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import React, { useState } from 'react';
 import { Search } from 'react-feather';
 import debounce from 'lodash.debounce';
+import { Selection } from '../..';
 import QUERY_REPOSITORY_NAME from '../../../shared/queries/repository';
 import AutoCompleteForm from '../AutoCompleteForm';
 import EmptyListBannerStyles from './EmptyListBannerStyles';
@@ -9,9 +10,9 @@ import ListLayoutStyles from './ListLayoutStyles';
 import ListItemStyles from './ListItem';
 
 interface ListLayoutProps {
-  addRepository: (newRepo: string) => void;
-  removeRepository: (repo: string) => void;
-  repoSelection: Array<string>;
+  addRepository: (newRepo: Selection) => void;
+  removeRepository: (repo: Selection) => void;
+  repoSelection: Array<Selection>;
 }
 
 const ListLayout = ({
