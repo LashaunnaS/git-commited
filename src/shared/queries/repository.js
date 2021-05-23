@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 const QUERY_REPOSITORY_NAME = gql`
-  query ($searchQ: String!) {
+  query QUERY_REPOSITORY_NAME($searchQ: String!) {
     search(query: $searchQ, type: REPOSITORY, first: 6) {
       edges {
         node {
@@ -13,8 +13,5 @@ const QUERY_REPOSITORY_NAME = gql`
     }
   }
 `;
-//  {
-//    "searchQ": "is:public react in:title"
-//  }
 
 export default QUERY_REPOSITORY_NAME;
