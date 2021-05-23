@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 
 const ListItemColorStripStyles = styled.div`
-  background-color: blue; // figure out a generated color
+  background-color: ${(props) => props.color};
   border-radius: var(--border-radius-regular) var(--border-radius-none)
     var(--border-radius-none) var(--border-radius-regular);
   width: 2%;
