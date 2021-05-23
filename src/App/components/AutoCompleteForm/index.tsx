@@ -5,10 +5,12 @@ import DropDownItem from './DropDownItemStyles/DropDownItemStyles';
 import RepositoryNameStyles from '../../../shared/styledComponents/RepositoryNameStyles';
 import Form from './FormStyles/FormStyles';
 import Input from './InputStyles/InputStyles';
+import { Selection } from '../..';
+import colorGenerator from '../../../shared/utils/colorGenerator';
 
 interface AutoCompleteProps {
   repositories: Array<string>;
-  addRepository: (newRepo: string) => void;
+  addRepository: (newRepo: Selection) => void;
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
   loading: boolean;
 }
@@ -37,11 +39,11 @@ const Autocomplete = ({
     }
   };
 
-  const onClick = (repoIndex: number) => {
+  const onClick = () => {
     setActive(0);
     setIsShow(false);
     setInput('');
-    addRepository(repositories[repoIndex]);
+    addRepository({ nameWithOwner: repositories[active], color: colorGenerator() });
   };
 
   const onKeyDown = (
@@ -53,7 +55,7 @@ const Autocomplete = ({
       setActive(0);
       setIsShow(false);
       setInput('');
-      addRepository(repositories[active]);
+      addRepository({ nameWithOwner: repositories[active], color: colorGenerator() });
     } else if (e.keyCode === 38) {
       // "up arrow" key
       return active === 0 ? null : setActive(active - 1);
@@ -82,7 +84,7 @@ const Autocomplete = ({
         <DropDownItem
           active={index === active}
           key={repository}
-          onClick={() => onClick(index)}
+          onClick={() => onClick()}
         >
           {formatRepositoryName(repository)}
         </DropDownItem>
