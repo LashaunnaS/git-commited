@@ -53,13 +53,12 @@ const Autocomplete = ({
   const onKeyDown = (
     e: React.KeyboardEvent,
   ): void | null | React.SetStateAction<number> => {
-    if (repositories.length > 0 && e.keyCode === 13) {
+    if (e.keyCode === 13) {
       // "enter" key
       e.preventDefault();
       setActive(0);
       setIsShow(false);
       setInput('');
-      console.log(repositories[active]);
       addRepository({
         id: Math.floor(Math.random() * (999 - 1 + 1)) + 1,
         nameWithOwner: repositories[active],
