@@ -43,19 +43,28 @@ const Autocomplete = ({
     setActive(0);
     setIsShow(false);
     setInput('');
-    addRepository({ nameWithOwner: repositories[active], color: colorGenerator() });
+    addRepository({
+      id: Math.floor(Math.random() * (999 - 1 + 1)) + 1,
+      nameWithOwner: repositories[active],
+      color: colorGenerator(),
+    });
   };
 
   const onKeyDown = (
     e: React.KeyboardEvent,
   ): void | null | React.SetStateAction<number> => {
-    if (e.keyCode === 13) {
+    if (repositories.length > 0 && e.keyCode === 13) {
       // "enter" key
       e.preventDefault();
       setActive(0);
       setIsShow(false);
       setInput('');
-      addRepository({ nameWithOwner: repositories[active], color: colorGenerator() });
+      console.log(repositories[active]);
+      addRepository({
+        id: Math.floor(Math.random() * (999 - 1 + 1)) + 1,
+        nameWithOwner: repositories[active],
+        color: colorGenerator(),
+      });
     } else if (e.keyCode === 38) {
       // "up arrow" key
       return active === 0 ? null : setActive(active - 1);
@@ -113,6 +122,7 @@ const Autocomplete = ({
   return (
     <Form dropDownActive={isShow}>
       <Input
+        disabled={loading}
         type="text"
         onChange={onChange}
         onKeyDown={onKeyDown}
