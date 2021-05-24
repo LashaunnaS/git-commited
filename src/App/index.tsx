@@ -17,6 +17,7 @@ const client = new ApolloClient({
 });
 
 export interface Selection extends Pick<Repository, 'nameWithOwner'> {
+  id: string;
   color: string;
 }
 
