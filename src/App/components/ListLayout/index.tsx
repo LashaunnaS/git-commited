@@ -55,7 +55,13 @@ const ListLayout = ({
         </EmptyListBannerStyles>
       ) : (
         repoSelection.map((repo) => {
-          return <ListItemStyles repository={repo} removeRepository={removeRepository} />;
+          return (
+            <ListItemStyles
+              key={`${repo.id}-${repo.nameWithOwner}`}
+              repository={repo}
+              removeRepository={removeRepository}
+            />
+          );
         })
       )}
     </ListLayoutStyles>
