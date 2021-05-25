@@ -12,12 +12,12 @@ import ListItemStyles from './ListItem';
 interface ListLayoutProps {
   addRepository: (newRepo: Selection) => void;
   removeRepository: (repo: Selection) => void;
-  repoSelection: Array<Selection>;
+  selection: Array<Selection>;
 }
 
 const ListLayout = ({
   addRepository,
-  repoSelection,
+  selection,
   removeRepository,
 }: ListLayoutProps): JSX.Element => {
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -48,13 +48,13 @@ const ListLayout = ({
         setSearchQuery={setSearchTermDebounced}
         loading={loading}
       />
-      {repoSelection.length === 0 ? (
+      {selection.length === 0 ? (
         <EmptyListBannerStyles>
-          <Search color="#bcbcf2" size={50} />
+          <Search color="var(--color-purple-lighter)" size={50} />
           <p> Search for a GitHub repository to populate graph</p>
         </EmptyListBannerStyles>
       ) : (
-        repoSelection.map((repo) => {
+        selection.map((repo) => {
           return (
             <ListItemStyles
               key={`${repo.id}-${repo.nameWithOwner}`}
