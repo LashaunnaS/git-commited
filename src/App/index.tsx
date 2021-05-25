@@ -38,7 +38,7 @@ const App = (): JSX.Element => {
         <GridLayout />
         <ListLayout
           addRepository={addRepository}
-          repoSelection={selection}
+          selection={selection}
           removeRepository={removeRepository}
         />
       </AppLayout>
