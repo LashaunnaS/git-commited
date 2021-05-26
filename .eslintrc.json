@@ -38,8 +38,9 @@
         "@typescript-eslint/explicit-function-return-type": "off",
         "max-len": ["warn",{"code": 90}],
         "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn",
-        "import/prefer-default-export": "off"
+        "import/prefer-default-export": "off",
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+        "react-hooks/exhaustive-deps": "off" 
     },
     "settings": {
         "import/resolver": {
