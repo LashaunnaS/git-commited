@@ -8,6 +8,7 @@ import AutoCompleteForm from '../AutoCompleteForm';
 import EmptyListBannerStyles from './EmptyListBannerStyles';
 import ListLayoutStyles from './ListLayoutStyles';
 import ListItemStyles from './ListItem';
+import { RepositoryEdge } from '../../../generated/graphql';
 
 interface ListLayoutProps {
   addRepository: (newRepo: Selection) => void;
@@ -30,7 +31,9 @@ const ListLayout = ({
 
   const selectedRepo: Array<string> = [];
 
-  data?.search.edges.forEach((repo: any) => selectedRepo.push(repo.node.nameWithOwner));
+  data?.search.edges.forEach(
+    (repo: RepositoryEdge) => repo.node && selectedRepo.push(repo.node.nameWithOwner),
+  );
 
   return (
     <ListLayoutStyles>
