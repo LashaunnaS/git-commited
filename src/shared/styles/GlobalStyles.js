@@ -26,7 +26,8 @@ const GlobalStyle = createGlobalStyle`
     --color-purple-lighter: #bcbcf2;
     --color-purple-light: #9797bc; 
     --color-purple-dark: #242432; 
-    --color-black-regular: #252525; 
+    --color-black-regular: #252525;
+    --background-color-primary: #37374a;  
 
     // Screen Size
     --screen-xs: 575px;
