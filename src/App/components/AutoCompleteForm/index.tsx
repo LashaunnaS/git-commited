@@ -95,6 +95,7 @@ const Autocomplete = ({
           active={index === active}
           key={repository}
           onClick={() => onClick()}
+          onMouseEnter={() => setActive(repositories.indexOf(repository))}
         >
           {formatRepositoryName(repository)}
         </DropDownItem>
