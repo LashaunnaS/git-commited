@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { format, fromUnixTime } from 'date-fns';
 import { Selection } from '../..';
 import defaultData from './data';
-import MyResponsiveLine from './MyResponsiveLine';
+import MyResponsiveLine from './Grid/MyResponsiveLine';
 import GridLayoutStyles from './GridLayoutStyles';
 
 interface GridDataProps {
