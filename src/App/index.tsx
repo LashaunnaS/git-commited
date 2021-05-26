@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 import axios, { AxiosResponse } from 'axios';
-import { Repository } from '../generated/graphql';
+import { Commit, Repository } from '../generated/graphql';
 import GlobalStyle from '../shared/styles/GlobalStyles';
 import AppLayout from './AppLayoutStyles';
 import GridLayout from './components/GridLayout/index';
@@ -32,8 +32,7 @@ export interface Selection extends Pick<Repository, 'nameWithOwner'> {
 const App = (): JSX.Element => {
   const [selection, setSelection] = useState<Array<Selection>>([]);
 
-  // : Promise<AxiosResponse<Array<Commits>>>
-  const fetchRepoCommits = async (repositoryName: string) => {
+  const fetchRepoCommits = async (repositoryName: string): Promise<Array<Commits>> => {
     const [owner, name] = repositoryName.split('/');
     // eslint-disable-next-line max-len
     const gitHubUrl = `https://api.github.com/repos/${owner}/${name}/stats/commit_activity`;
