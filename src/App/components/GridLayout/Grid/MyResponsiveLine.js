@@ -32,6 +32,7 @@ const MyResponsiveLine = ({ data }) => {
           </TooltipTextStyles>
         </TooltipStyles>
       )}
+      enableCrosshair={false}
       curve="natural"
       axisTop={null}
       axisRight={null}
