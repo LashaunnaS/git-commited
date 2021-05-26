@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Search } from 'react-feather';
-import DropDown from './DropDownStyles/DropDownStyles';
-import DropDownItem from './DropDownItemStyles/DropDownItemStyles';
-import RepositoryNameStyles from '../../../shared/styledComponents/RepositoryNameStyles';
-import Form from './FormStyles/FormStyles';
-import Input from './InputStyles/InputStyles';
 import { Selection } from '../..';
 import colorGenerator from '../../../shared/utils/colorGenerator';
+import RepositoryNameStyles from '../../../shared/styledComponents/RepositoryNameStyles';
+import DropDown from './DropDownStyles/DropDownStyles';
+import DropDownItem from './DropDownItemStyles/DropDownItemStyles';
+import Form from './FormStyles/FormStyles';
+import Input from './InputStyles/InputStyles';
 
 interface AutoCompleteProps {
   repositories: Array<string>;
@@ -25,7 +25,9 @@ const Autocomplete = ({
   const [isShow, setIsShow] = useState<boolean>(false);
   const [input, setInput] = useState<string>('');
 
-  const onChange = (e: React.FormEvent<HTMLInputElement>) => {
+  const numberGenerator = Math.floor(Math.random() * (999 - 1 + 1)) + 1;
+
+  const onChange = (e: React.FormEvent<HTMLInputElement>): void => {
     const newInput = e.currentTarget.value;
 
     if (newInput === '') {
@@ -39,12 +41,12 @@ const Autocomplete = ({
     }
   };
 
-  const onClick = () => {
+  const onClick = (): void => {
     setActive(0);
     setIsShow(false);
     setInput('');
     addRepository({
-      id: Math.floor(Math.random() * (999 - 1 + 1)) + 1,
+      id: numberGenerator,
       nameWithOwner: repositories[active],
       color: colorGenerator(),
     });
@@ -60,7 +62,7 @@ const Autocomplete = ({
       setIsShow(false);
       setInput('');
       addRepository({
-        id: Math.floor(Math.random() * (999 - 1 + 1)) + 1,
+        id: numberGenerator,
         nameWithOwner: repositories[active],
         color: colorGenerator(),
       });
@@ -75,7 +77,7 @@ const Autocomplete = ({
     return null;
   };
 
-  const formatRepositoryName = (repository: string) => {
+  const formatRepositoryName = (repository: string): JSX.Element => {
     const repo = repository.split('/');
 
     return (
@@ -86,7 +88,7 @@ const Autocomplete = ({
     );
   };
 
-  const dropDownList = () => {
+  const dropDownList = (): Array<JSX.Element> => {
     return repositories.map((repository: string, index: number) => {
       return (
         <DropDownItem
@@ -100,7 +102,7 @@ const Autocomplete = ({
     });
   };
 
-  const renderDropDownContent = () => {
+  const renderDropDownContent = (): Array<JSX.Element> | JSX.Element => {
     if (repositories.length) {
       return dropDownList();
     }
@@ -128,7 +130,7 @@ const Autocomplete = ({
         value={input}
         placeholder="Search a GitHub Repository..."
       />
-      <Search color="#37374a" />
+      <Search color="var(--color-purple-dark)" />
       {isShow && input && renderAutocomplete()}
     </Form>
   );
