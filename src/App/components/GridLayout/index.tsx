@@ -24,10 +24,10 @@ const GridLayout = ({ selection }: GridLayoutProps): JSX.Element => {
         id: item.nameWithOwner,
         color: item.color,
         data: item?.commits?.map((value) => {
-          const theDate = fromUnixTime(value.week);
+          const weekOf = fromUnixTime(value.week);
 
           return {
-            x: format(theDate, 'yyyy-MM-dd'),
+            x: format(weekOf, 'yyyy-MM-dd'),
             y: value.total,
           };
         }),
