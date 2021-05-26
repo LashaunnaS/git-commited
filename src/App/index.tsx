@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
-import axios, { AxiosResponse } from 'axios';
-import { Commit, Repository } from '../generated/graphql';
+import axios from 'axios';
+import { Repository } from '../generated/graphql';
 import GlobalStyle from '../shared/styles/GlobalStyles';
 import AppLayout from './AppLayoutStyles';
 import GridLayout from './components/GridLayout/index';
