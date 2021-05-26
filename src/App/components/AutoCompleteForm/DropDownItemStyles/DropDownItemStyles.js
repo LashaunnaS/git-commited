@@ -5,7 +5,7 @@ const DropDownItem = styled.li`
     props.active ? 'var(--color-white-tint)' : 'var(--color-white-regular)'};
   height: var(--height-primary);
   overflow: hidden;
-  padding: 1rem 3rem;
+  padding: ${(props) => (props.notFound ? '1rem 3rem' : '2rem 3rem')};
   text-overflow: ellipsis;
 
   &:last-child {

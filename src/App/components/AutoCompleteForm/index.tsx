@@ -110,7 +110,7 @@ const Autocomplete = ({
       return <DropDownItem>loading...</DropDownItem>;
     }
     return (
-      <DropDownItem>
+      <DropDownItem notFound>
         We couldn’t find any repositories matching &apos;{input}&apos;
       </DropDownItem>
     );
