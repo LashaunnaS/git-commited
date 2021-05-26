@@ -1,8 +1,9 @@
-import { useQuery } from '@apollo/client';
 import React from 'react';
+import { useQuery } from '@apollo/client';
 import { Star, Trash2 } from 'react-feather';
 import formatDistance from 'date-fns/formatDistance';
 import format from 'date-fns/format/index';
+import { Selection } from '../../..';
 import QUERY_REPOSITORY_STATS from '../../../../shared/queries/repositoryStats';
 import RepositoryNameStyles from '../../../../shared/styledComponents/RepositoryNameStyles';
 import ListItemColorStripStyles from './ListItemColorStripStyles/ListItemColorStripStyles';
@@ -12,7 +13,6 @@ import ListItemStarsStyles from './ListItemStarsStyles/ListItemStarsStyles';
 import ListItemStatsStyles from './ListItemStatsStyles/ListItemStatsStyles';
 import ListItemUpdateTextStyles from './ListItemUpdateTextStyles/ListItemUpdateTextStyles';
 import ListItemDeleteButtonStyles from './ListItemDeleteButtonStyles/ListItemDeleteButtonStyles';
-import { Selection } from '../../..';
 
 interface ListItemProps {
   repository: Selection;
@@ -38,11 +38,11 @@ const ListItem = ({ repository, removeRepository }: ListItemProps): JSX.Element 
 
   const lastUpdated = () => {
     const currDate = new Date();
-    const lastUpdatedDate = data?.repository.updatedAt;
+    const lastUpdatedDate = data.repository.updatedAt;
     const lastUpdatedInYear = format(new Date(lastUpdatedDate), 'YYY');
 
     if (currDate.getFullYear() - Number(lastUpdatedInYear) < 1) {
-      return `Updated ${formatDistance(new Date(), new Date(data?.repository.updatedAt), {
+      return `Updated ${formatDistance(new Date(), new Date(data.repository.updatedAt), {
         includeSeconds: true,
       })} ago`;
     }
@@ -66,7 +66,7 @@ const ListItem = ({ repository, removeRepository }: ListItemProps): JSX.Element 
       <ListItemStatsStyles>
         {formatRepositoryName()}
         <div>
-          <Star color="var(--color-white-regular)" size="13" />
+          <Star color="var(--color-white-regular)" size={13} />
           <ListItemStarsStyles>{stars()}</ListItemStarsStyles>
           <ListItemUpdateTextStyles>{data && lastUpdated()}</ListItemUpdateTextStyles>
         </div>

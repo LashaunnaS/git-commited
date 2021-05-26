@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import styled from 'styled-components';
 
 const ListItemStyles = styled.div`
