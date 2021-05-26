@@ -12,8 +12,11 @@
   },
   "dependencies": {
     "@apollo/client": "^3.3.18",
+    "@nivo/core": "^0.70.0",
+    "@nivo/line": "^0.70.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
+    "axios": "^0.21.1",
     "date-fns": "2.21.3",
     "eslint-import-resolver-typescript": "^2.4.0",
     "graphql": "^15.5.0",
