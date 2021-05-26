@@ -1,5 +1,5 @@
-import { useQuery } from '@apollo/client';
 import React, { useState } from 'react';
+import { useQuery } from '@apollo/client';
 import { Search } from 'react-feather';
 import debounce from 'lodash.debounce';
 import { Selection } from '../..';
@@ -22,19 +22,11 @@ const ListLayout = ({
 }: ListLayoutProps): JSX.Element => {
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const { loading, error, data } = useQuery(QUERY_REPOSITORY_NAME, {
+  const { loading, data } = useQuery(QUERY_REPOSITORY_NAME, {
     variables: { searchQ: `is:public ${searchQuery} in:titles` },
   });
 
-  if (error) {
-    return (
-      <ListLayoutStyles>
-        <p>{error}...</p>
-      </ListLayoutStyles>
-    );
-  }
-
-  const setSearchTermDebounced = debounce(setSearchQuery, 500);
+  const setSearchTermDebounced = debounce(setSearchQuery, 550);
 
   const selectedRepo: Array<string> = [];
 
